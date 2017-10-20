@@ -18,7 +18,7 @@ This report could focus in on, for example: different bacterial taxa on male vs 
 
 Please follow the instructions carefully and read them all before getting started.
 
-This second assignment will be worth 50 points and will count for 12.5% of your final semester grade. So take this assignment seriously and start early!! 
+This first analysis report will be worth 50 points and will count for 12.5% of your final semester grade. So take this assignment seriously and start early!! 
 
 The grading breakdown will be as follows:
 
