@@ -1,6 +1,6 @@
 ---
 title: "Analysis Report 1: Your Title Here"
-author: "Don Francisco"
+author: "Isabella Finney"
 date: "October 20, 2017"
 output: github_document
 bibliography: references.bib
