@@ -1,0 +1,82 @@
+---
+title: "Analysis Report 1: Your Title Here"
+author: "Don Francisco"
+date: "October 20, 2017"
+output: github_document
+bibliography: references.bib
+csl: bioinformatics.csl
+---
+
+# Introduction
+
+Add about 1.5-2 pages here. Must cite at least 5 peer reviewed articles.
+
+# Methods
+
+## Sample origin and sequencing
+
+Add about half a page here. In this section instead of first person (I/we), use Fierer et al., since you'll just be describing what they did, based on the methods in their paper.
+
+## Computational
+
+These are the methods you used. Should probably be at least a half of a page. At a very minimum should include citations for DADA2 [@callahan2016] and phyloseq [@mcmurdie2013].
+
+# Results
+
+In addition to a minimum of 3-4 figures/tables (and associated captions), you should include sufficient text in this section to describe what your findings were. Remember that in the results section you just describe what you found, but you don't interpret it - that happens in the discussion.
+
+```{r load-libraries, message = FALSE}
+# Be sure to install these packages before running this script
+# They can be installed either with the intall.packages() function
+# or with the 'Packages' pane in RStudio
+
+# load general-use packages
+library("dplyr")
+library("tidyr")
+library("knitr")
+
+# this package allows for the easy inclusion of literature citations in our Rmd
+# more info here: https://github.com/crsh/citr 
+# and here:
+# http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html
+library("citr")
+
+# These are the primary packages well use to clean and analyze the data
+library("dada2")
+
+# And this to visualize our results
+library("phyloseq")
+```
+
+```{r make-read-in-data-function}
+# NOTE: Much of the following follows the DADA2 tutorials available here:
+# https://benjjneb.github.io/dada2/tutorial.html
+# Accessed October 19, 2017
+
+
+```
+
+
+
+```{r read-in-metadata-and-join}
+# Next we want to read in the metadata file so we can add that in too
+# This is not a csv file, so we have to use a slightly different syntax
+# here the `sep = "\t"` tells the function that the data are tab-delimited
+# and the `stringsAsFactors = FALSE` tells it not to assume that things are
+# categorical variables
+metadata_in <- read.table(paste0("data/metadata/",
+                                 "fierer_forensic_hand_mouse_SraRunTable.txt"),
+                          sep = "\t",
+                          header = TRUE,
+                          stringsAsFactors = FALSE)
+
+
+```
+
+# Discussion
+
+Add around 2-3 pages interpreting your results and considering future directions one might take in analyzing these data.
+
+# Sources Cited
+
+
