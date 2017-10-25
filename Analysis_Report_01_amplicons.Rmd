@@ -269,14 +269,19 @@ phyloseq_obj <- phyloseq(otu_table(sequence_table_nochim,
                          sample_data(metadata_in), # metadata for each sample
                          tax_table(taxa), # taxonomy for each sequence variant
                          phy_tree(tree_in)) # phylogeny from sequence variants
+
+melted_obj <- psmelt(phyloseq_obj) 
 ```
 
+
+
 ```{r histogram-female-sebum}
-joined_blast_data_metadata %>%
+metadata_in %>%
 filter(env_material_s == "sebum") %>%
 filter(sex_s == "female") %>%
-  pull(pident) %>%
+  #pull(pident) %>%
   hist(main = "Female Percent Identity of Sebum",
+       x = "Female",
        xlab = "Percent",
        col = "plum")
 ```
@@ -343,6 +348,8 @@ plot_bar(pruned_phyloseq, x = "sex_s", y = "Abundance", fill = "Phylum",
  title = NULL, facet_grid = NULL) +
   scale_fill_brewer(palette = "Paired")
 ```
+
+**FIGUREEEEE**:
 
 # Discussion
 
