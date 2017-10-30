@@ -270,7 +270,7 @@ phyloseq_obj <- phyloseq(otu_table(sequence_table_nochim,
                          tax_table(taxa), # taxonomy for each sequence variant
                          phy_tree(tree_in)) # phylogeny from sequence variants
 
-melted_obj <- psmelt(phyloseq_obj) 
+melted_obj <- psmelt(phyloseq_obj)
 ```
 
 
