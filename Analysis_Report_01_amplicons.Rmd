@@ -1,5 +1,5 @@
 ---
-title: "Analysis Report 1: Your Title Here"
+title: "Analysis Report 1: Comparison of Male and Female Microbial Communities"
 author: "Isabella Finney"
 date: "October 20, 2017"
 output: github_document
@@ -302,18 +302,24 @@ set.seed(15)
 pruned_phyloseq <- subset_samples(phyloseq_obj, sex_s != "Not applicable")
 pruned_ord <- ordinate(pruned_phyloseq, "NMDS", "bray")
 
-p1 = plot_ordination(pruned_phyloseq, pruned_ord,
+p1 <- plot_ordination(pruned_phyloseq, pruned_ord,
                      type = "samples",
                      color = "sex_s",
                      title = "Ordination of Male versus Female Sequences")
 print(p1)
+```
+
+**Figure 3**: Plot ordination of the taxa present by gender. 
+
+```{r plot-ordination-of-phylum-by-sex}
 #Create Plot Ordination showing the phylum present by sex
-GP.ord <- ordinate(GP1, "NMDS", "bray")
-p1 = plot_ordination(GP1, GP.ord, type = "taxa", color = "Phylum", title = "taxa")
+pruned_phyloseq_ord <- ordinate(pruned_phyloseq,"NMDS", "bray")
+p1 <- plot_ordination(pruned_phyloseq, pruned_phyloseq_ord, 
+                      type = "taxa", color = "Phylum", title = "taxa")
 print(p1)
 ```
 
-**Figure 3**: Plot Ordination of the taxa present by gender.
+**Figure 4**: Plot Ordination of the phylum present by gender.
 
 ```{r example-phyloseq-plot-2}
 # phylogeny, yay!
@@ -323,7 +329,7 @@ plot_tree(phyloseq_obj,
           ladderize = TRUE) # this arranges the tree branches from short to long
 ```
 
-**Figure 4**: Inferred phylogeny of sequences, with points on tips representing samples within which each particular taxa occurred. Tree represents maximum likelihood phylogeny inferred using RAxML.
+**Figure 5**: Inferred phylogeny of sequences, with points on tips representing samples within which each particular taxa occurred. Tree represents maximum likelihood phylogeny inferred using RAxML.
 
 install.packages("RColorBrewer")
 
@@ -333,14 +339,14 @@ plot_bar(pruned_phyloseq, x = "sex_s", y = "Abundance", fill = "Phylum",
   scale_fill_brewer(palette = "Paired")
 ```
 
-**Figure 5**: Bar plot of the phylum present by gender.
+**Figure 6**: Bar plot of the phylum present by gender.
 
 ```{r bar-plot-of-class-presence-by-sex}
 pruned_phyloseq <- subset_samples(phyloseq_obj, sex_s != "Not applicable")
 plot_bar(pruned_phyloseq, x = "Class", fill = "sex_s")
 ```
 
-**Figure 6**: Bar plot of class present colored by gender.
+**Figure 7**: Bar plot of class present colored by gender.
 
 # Discussion
 
