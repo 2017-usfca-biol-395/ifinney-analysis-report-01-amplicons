@@ -166,7 +166,7 @@ The output table has `r nrow(sequence_table)` rows (samples) and `r ncol(sequenc
 ```{r histogram-of-sequence-lengths}
 # Quick check to look at distribution of trimmed and denoised sequences
 hist(nchar(getSequences(sequence_table)),
-     main = "Histogram of fingal sequence variant lengths",
+     main = "Histogram of fungal sequence variant lengths",
      xlab = "Sequence length in bp")
 ```
 
@@ -274,37 +274,11 @@ melted_obj <- psmelt(phyloseq_obj)
 ```
 
 
-
-```{r histogram-female-sebum}
-metadata_in %>%
-filter(env_material_s == "sebum") %>%
-filter(sex_s == "female") %>%
-  #pull(pident) %>%
-  hist(main = "Female Percent Identity of Sebum",
-       x = "Female",
-       xlab = "Percent",
-       col = "plum")
-```
-
-**FIGUREEE**:
-
-```{r histogram-male-sebum}
-joined_blast_data_metadata %>%
-filter(env_material_s == "sebum") %>%
-filter(sex_s == "male") %>%
-  pull(pident) %>%
-  hist(main = "Male Percent Identity of Sebum",
-       xlab = "Percent",
-       col = "skyblue")
-```
-
-**figureee**: 
-
 ```{r example-phyloseq-plot-1}
 # alpha diversity metrics
 plot_richness(phyloseq_obj,
               x = "env_material_s",
-              measures = c("Shannon", "Simpson"),
+              measures = c("Shannon"),
               color = "sex_s") +
   xlab("Sample origin") +
   geom_jitter(width = 0.2) +
@@ -312,6 +286,15 @@ plot_richness(phyloseq_obj,
 ```
 
 **Figure 1**: Alpha diversity measures of the two sample types, colored by gender.
+
+```{r plot-richness-for-male-and-female}
+pruned_phyloseq <- subset_samples(phyloseq_obj, sex_s != "Not applicable")
+plot_richness(pruned_phyloseq,
+              measures = "Observed",
+              color = "sex_s")
+```
+
+**Figure 2**: Alpha richness of the observed samples colored by gender.
 
 ```{r plot-ordination-of-taxa-by-sex}
 set.seed(15)
@@ -330,16 +313,17 @@ p1 = plot_ordination(GP1, GP.ord, type = "taxa", color = "Phylum", title = "taxa
 print(p1)
 ```
 
-**FIGUREEEEEEE**:
+**Figure 3**: Plot Ordination of the taxa present by gender.
 
 ```{r example-phyloseq-plot-2}
 # phylogeny, yay!
+phyloseq_obj <- subset_samples(phyloseq_obj, sex_s != "Not applicable")
 plot_tree(phyloseq_obj,
           color = "sex_s",
           ladderize = TRUE) # this arranges the tree branches from short to long
 ```
 
-**Figure 2**: Inferred phylogeny of sequences, with points on tips representing samples within which each particular taxa occurred. Tree represents maximum likelihood phylogeny inferred using RAxML.
+**Figure 4**: Inferred phylogeny of sequences, with points on tips representing samples within which each particular taxa occurred. Tree represents maximum likelihood phylogeny inferred using RAxML.
 
 install.packages("RColorBrewer")
 
@@ -349,7 +333,14 @@ plot_bar(pruned_phyloseq, x = "sex_s", y = "Abundance", fill = "Phylum",
   scale_fill_brewer(palette = "Paired")
 ```
 
-**FIGUREEEEE**:
+**Figure 5**: Bar plot of the phylum present by gender.
+
+```{r bar-plot-of-class-presence-by-sex}
+pruned_phyloseq <- subset_samples(phyloseq_obj, sex_s != "Not applicable")
+plot_bar(pruned_phyloseq, x = "Class", fill = "sex_s")
+```
+
+**Figure 6**: Bar plot of class present colored by gender.
 
 # Discussion
 
