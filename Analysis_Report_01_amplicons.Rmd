@@ -298,7 +298,7 @@ plot_richness(pruned_phyloseq,
 
 ```{r plot-ordination-of-taxa-by-sex}
 set.seed(15)
-#Pruning to subset the dataset 
+#Pruning to subset the dataset
 pruned_phyloseq <- subset_samples(phyloseq_obj, sex_s != "Not applicable")
 pruned_ord <- ordinate(pruned_phyloseq, "NMDS", "bray")
 
@@ -313,8 +313,8 @@ print(p1)
 
 ```{r plot-ordination-of-phylum-by-sex}
 #Create Plot Ordination showing the phylum present by sex
-pruned_phyloseq_ord <- ordinate(pruned_phyloseq,"NMDS", "bray")
-p1 <- plot_ordination(pruned_phyloseq, pruned_phyloseq_ord, 
+pruned_phyloseq_ord <- ordinate(pruned_phyloseq, "NMDS", "bray")
+p1 <- plot_ordination(pruned_phyloseq, pruned_phyloseq_ord,
                       type = "taxa", color = "Phylum", title = "taxa")
 print(p1)
 ```
