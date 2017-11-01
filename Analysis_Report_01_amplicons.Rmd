@@ -8,9 +8,10 @@ csl: bioinformatics.csl
 ---
 
 # Introduction
-QUESTION: What makes male and female bacteria different? -differences in microbrial communities in both of them?
 
-Add about 1.5-2 pages here. Must cite at least 5 peer reviewed articles.
+  The skin is the largest organ in the human body. It acts as an effective barrier against pathogen and foreign invasions into the body. Not only is it a defense barrier, but it is also populated by a diverse number of microorganisms that serve different purposes. The skin acts as an ecological system depending on the particular environment the skin is exposed to at different times [@grice2011skin]. The ecological environment that the skin encounters determine the colonization of these microorganisms. Other determining factors are based on things that involve the host, such as gender, age, and hygiene. 
+  The development and application of modern molecular methods has made it possible for scientists to more fully understand the diverse communities of bacteria found on all over the body. The use of high-throughput sequencing on 16S ribosomal RNA genes has helped accomplished this goal [@olsen1986microbial]. The significance in the 16s RNA gene is that it’s universally found in all bacteria. This allows scientists to compare the sequences at various levels of taxonomic resolution [@woese1987bacterial]. Through various studies, scientists were able to conclude that different portions of the body have more concentrated portions of certain bacterial microorganisms than other areas on the body. Bacterial community concentrations are often dependent on moist, dry and sebaceous microenvironments. One of the difficulties in determining microorganisms on the skin is due to biases and inefficiency in extraction and sequencing 16S RNA genes. Whole genome shotgun sequencing must also be used in order to determine the full diversity of microorganisms. 
+  The areas with the most diversity are drier areas. This portion includes the buttocks, forearm, and portions of the hand. The most common microbiota found in these places are from the phyla Proteobacteria, Actinobacteria, Firmicutes, and Bacteriodetes [@grice2008diversity]. In particular, hands are important to the transfer of microorganisms across surfaces. Through various research, scientists were able to determine that 17% of the phylotypes were the same among the hands of the same individual and 13% was present on hands of different individuals [@fierer2008influence]. The hands also have about less than 150 distinctive bacterial phylotypes present [@stackebrandt1994taxonomic]. Age, gender, exposure to materials, hygiene, and dominant handedness were all contributing factors to the variation of microbiota. When taking a closer look at some of the contributing factors, the differences between males and female hands presented an interesting case. Using the results collected from a study that looked at bacterial communities present on the surface of hands [@fierer2010forensic], I further investigated whether gender differences are a strong factor in the production of certain bacterial communities. Some facts to consider are that statistically, male hands had larger pore size, skin thickness, lower pH, and produced more sebum [@pochi1974endocrinologic]. Taking into account these differences, I hypothesized that females would have a higher presence of diverse microbial communities than men. Investigating different aspects of the dataset may help determine whether gender difference plays a large role in the diversity of bacterial communities. 
 
 # Methods
 
@@ -23,8 +24,6 @@ Add about half a page here. In this section instead of first person (I/we), use 
 These are the methods you used. Should probably be at least a half of a page. At a very minimum should include citations for DADA2 [@callahan2016] and phyloseq [@mcmurdie2013]. Note that these don't count towards the five references you need to cite in the introduction.
 
 # Results
-
-In addition to a minimum of 3-4 figures/tables (and associated captions), you should include sufficient text in this section to describe what your findings were. Remember that in the results section you just describe what you found, but you don't interpret it - that happens in the discussion.
 
 ```{r load-libraries, message = FALSE}
 # Be sure to install these packages before running this script
@@ -315,7 +314,7 @@ print(p1)
 #Create Plot Ordination showing the phylum present by sex
 pruned_phyloseq_ord <- ordinate(pruned_phyloseq, "NMDS", "bray")
 p1 <- plot_ordination(pruned_phyloseq, pruned_phyloseq_ord,
-                      type = "taxa", color = "Phylum", title = "taxa")
+                      type = "Taxa", color = "Phylum", title = "taxa")
 print(p1)
 ```
 
