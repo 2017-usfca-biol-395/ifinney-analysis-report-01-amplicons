@@ -1,4 +1,4 @@
-Analysis Report 1: Your Title Here
+Analysis Report 1: Comparison of Male and Female Microbial Communities
 ================
 Isabella Finney
 October 20, 2017
@@ -6,9 +6,7 @@ October 20, 2017
 Introduction
 ============
 
-QUESTION: What makes male and female bacteria different? -differences in microbrial communities in both of them?
-
-Add about 1.5-2 pages here. Must cite at least 5 peer reviewed articles.
+The skin is the largest organ in the human body. It acts as an effective barrier against pathogen and foreign invasions into the body. Not only is it a defense barrier, but it is also populated by a diverse number of microorganisms that serve different purposes. The skin acts as an ecological system depending on the particular environment the skin is exposed to at different times (Grice and Segre, 2011). The ecological environment that the skin encounters determine the colonization of these microorganisms. Other determining factors are based on things that involve the host, such as gender, age, and hygiene. The development and application of modern molecular methods has made it possible for scientists to more fully understand the diverse communities of bacteria found on all over the body. The use of high-throughput sequencing on 16S ribosomal RNA genes has helped accomplished this goal (Olsen *et al.*, 1986). The significance in the 16s RNA gene is that it’s universally found in all bacteria. This allows scientists to compare the sequences at various levels of taxonomic resolution (Woese, 1987). Through various studies, scientists were able to conclude that different portions of the body have more concentrated portions of certain bacterial microorganisms than other areas on the body. Bacterial community concentrations are often dependent on moist, dry and sebaceous microenvironments. One of the difficulties in determining microorganisms on the skin is due to biases and inefficiency in extraction and sequencing 16S RNA genes. Whole genome shotgun sequencing must also be used in order to determine the full diversity of microorganisms. The areas with the most diversity are drier areas. This portion includes the buttocks, forearm, and portions of the hand. The most common microbiota found in these places are from the phyla Proteobacteria, Actinobacteria, Firmicutes, and Bacteriodetes (Grice *et al.*, 2008). In particular, hands are important to the transfer of microorganisms across surfaces. Through various research, scientists were able to determine that 17% of the phylotypes were the same among the hands of the same individual and 13% was present on hands of different individuals (Fierer *et al.*, 2008). The hands also have about less than 150 distinctive bacterial phylotypes present (Stackebrandt and Goebel, 1994). Age, gender, exposure to materials, hygiene, and dominant handedness were all contributing factors to the variation of microbiota. When taking a closer look at some of the contributing factors, the differences between males and female hands presented an interesting case. Using the results collected from a study that looked at bacterial communities present on the surface of hands (Fierer *et al.*, 2010), I further investigated whether gender differences are a strong factor in the production of certain bacterial communities. Some facts to consider are that statistically, male hands had larger pore size, skin thickness, lower pH, and produced more sebum (Pochi and Strauss, 1974). Taking into account these differences, I hypothesized that females would have a higher presence of diverse microbial communities than men. Investigating different aspects of the dataset may help determine whether gender difference plays a large role in the diversity of bacterial communities.
 
 Methods
 =======
@@ -16,17 +14,15 @@ Methods
 Sample origin and sequencing
 ----------------------------
 
-Add about half a page here. In this section instead of first person (I/we), use Fierer et al., since you'll just be describing what they did, based on the methods in their paper.
+A few different sample studies were preformed within the Fierer et al. paper, on different objects in order to test the accuracy of this hypothetical approach. The first study involved swabbing computer keyboards (25–30 keys per keyboard) as well as swabbing the and the skin on the ventral surface of the distal joint of each fingertip of the owner of the keyboard. Swabbing has been shown to be a sufficient method of collecting data. Swabbing this specific area of the body was chosen because the biomass levels on the skin are high enough to get a sufficient and equal amount of swabs collected per subject. Another study was designed to test the survival and matching accuracy of the bacterial communities after an extended period of time. This study essentially split the swab samples and froze half of them, while leaving other half to sit in normal, indoor environmental conditions for up to 14 days. The last study swabbed both the palms of the hands of different subjects as well as their computer mouse. Their mice had been last touched 12 hours before collection. To sequence this data, scientists used DNA extraction and pyrosequencing via 454 sequencer. This process involves purifying DNA into fragments, placing them into beads, and copying it multiple times via PCR. After PCR, the beads are placed into wells on a sequencing plate where nucleotide bases are added to each well. From there, light is given out to the wells and depending on the light intensity that the camera records, the wells will display the number of nucleotides of the same type.
 
 Computational
 -------------
 
-These are the methods you used. Should probably be at least a half of a page. At a very minimum should include citations for DADA2 (Callahan *et al.*, 2016) and phyloseq (McMurdie and Holmes, 2013). Note that these don't count towards the five references you need to cite in the introduction.
+The process to computationally parse and analyze the data gathered was accomplished using a systematic workflow. The first step was to install all the necessary packages needed to get the dataset in the best suited format possible. In particular, the two most important packages that were installed were DADA2 and phyloseq. DADA2 is a type of open-software package that’s designed to model and correct Illumina-sequenced amplicon errors. It is able to directly extrapolate sequences and accurately resolve any error in as little as 1 nucleotide base (Callahan *et al.*, 2016). The phyloseq pack is also an open-software. This software project was made to preform analysis of microbiome census data present in R. It imports data and allows a user to preform various types of analysis like subsetting, multi-table comparisons, and diversity analysis (McMurdie and Holmes, 2013). This package essentially allowed me to make the different figures comparing the data between men and women. The metadata set was first downloaded from the NCBI database. Then through the creation of a fastq processing script, the metadata was thoroughly trimmed based on a set of parameters determined from the 454 sequencer. From here, DADA2 does its job to check for errors in each of the samples. After doing quality checks on the trimmed and denoised sequences, chimeras were removed from the sequences in order to obtain a clean read. Chimeras are formed from two miscloned and joined DNA sequences. The cleaned sequences variants were assigned taxonomy based on known sequences and then a phylogeny was created from a fasta file format of the data. A phyloseq object was constructed from the DADA2 output.
 
 Results
 =======
-
-In addition to a minimum of 3-4 figures/tables (and associated captions), you should include sufficient text in this section to describe what your findings were. Remember that in the results section you just describe what you found, but you don't interpret it - that happens in the discussion.
 
 ``` r
 # Be sure to install these packages before running this script
@@ -578,7 +574,7 @@ unname(taxa)
     ##        [,1]       [,2]                        [,3]                 
     ##   [1,] "Bacteria" "Proteobacteria"            NA                   
     ##   [2,] "Bacteria" "Proteobacteria"            "Alphaproteobacteria"
-    ##   [3,] "Bacteria" "Bacteroidetes"             "Cytophagia"         
+    ##   [3,] "Bacteria" "Bacteroidetes"             NA                   
     ##   [4,] "Bacteria" "Proteobacteria"            NA                   
     ##   [5,] "Bacteria" "Proteobacteria"            "Betaproteobacteria" 
     ##   [6,] "Bacteria" "Cyanobacteria/Chloroplast" "Chloroplast"        
@@ -755,7 +751,7 @@ unname(taxa)
     ##        [,4]                 [,5]                  
     ##   [1,] NA                   NA                    
     ##   [2,] "Rhizobiales"        "Bartonellaceae"      
-    ##   [3,] "Cytophagales"       NA                    
+    ##   [3,] NA                   NA                    
     ##   [4,] NA                   NA                    
     ##   [5,] "Neisseriales"       "Neisseriaceae"       
     ##   [6,] "Chloroplast"        "Streptophyta"        
@@ -878,7 +874,7 @@ unname(taxa)
     ## [123,] "Actinomycetales"    "Nocardioidaceae"     
     ## [124,] "Lactobacillales"    "Carnobacteriaceae"   
     ## [125,] "Clostridiales"      "Lachnospiraceae"     
-    ## [126,] "Bacillales"         "Bacillaceae_1"       
+    ## [126,] "Bacillales"         NA                    
     ## [127,] "Clostridiales"      "Ruminococcaceae"     
     ## [128,] "Rhizobiales"        "Methylobacteriaceae" 
     ## [129,] "Rhodospirillales"   "Rhodospirillaceae"   
@@ -895,7 +891,7 @@ unname(taxa)
     ## [140,] "Erysipelotrichales" "Erysipelotrichaceae" 
     ## [141,] "Actinomycetales"    "Mycobacteriaceae"    
     ## [142,] "Actinomycetales"    "Microbacteriaceae"   
-    ## [143,] "Clostridiales"      "Ruminococcaceae"     
+    ## [143,] "Clostridiales"      NA                    
     ## [144,] "Actinomycetales"    "Propionibacteriaceae"
     ## [145,] "Clostridiales"      "Ruminococcaceae"     
     ## [146,] "Actinomycetales"    "Nocardioidaceae"     
@@ -914,7 +910,7 @@ unname(taxa)
     ## [159,] "Lactobacillales"    "Carnobacteriaceae"   
     ## [160,] "Flavobacteriales"   "Flavobacteriaceae"   
     ## [161,] "Fusobacteriales"    "Leptotrichiaceae"    
-    ## [162,] "Clostridiales"      NA                    
+    ## [162,] "Clostridiales"      "Ruminococcaceae"     
     ## [163,] "Bacillales"         "Bacillaceae_1"       
     ## [164,] "Clostridiales"      NA                    
     ## [165,] "Nitrospirales"      "Nitrospiraceae"      
@@ -980,10 +976,10 @@ unname(taxa)
     ##  [48,] NA                         
     ##  [49,] "Microbacterium"           
     ##  [50,] "Mycobacterium"            
-    ##  [51,] "Marmoricola"              
+    ##  [51,] NA                         
     ##  [52,] NA                         
     ##  [53,] "Streptomyces"             
-    ##  [54,] "Sphingosinicella"         
+    ##  [54,] NA                         
     ##  [55,] NA                         
     ##  [56,] NA                         
     ##  [57,] "Oscillibacter"            
@@ -994,7 +990,7 @@ unname(taxa)
     ##  [62,] "Microvirga"               
     ##  [63,] NA                         
     ##  [64,] "Arthrobacter"             
-    ##  [65,] NA                         
+    ##  [65,] "Marmoricola"              
     ##  [66,] "Microbacterium"           
     ##  [67,] "Sphingomonas"             
     ##  [68,] NA                         
@@ -1009,7 +1005,7 @@ unname(taxa)
     ##  [77,] "Nocardia"                 
     ##  [78,] "Nocardioides"             
     ##  [79,] "Subtercola"               
-    ##  [80,] "Butyricicoccus"           
+    ##  [80,] NA                         
     ##  [81,] "Cloacibacterium"          
     ##  [82,] "Microbacterium"           
     ##  [83,] "Sphingomonas"             
@@ -1055,7 +1051,7 @@ unname(taxa)
     ## [123,] "Nocardioides"             
     ## [124,] NA                         
     ## [125,] NA                         
-    ## [126,] "Bacillus"                 
+    ## [126,] NA                         
     ## [127,] NA                         
     ## [128,] "Microvirga"               
     ## [129,] "Niveispirillum"           
@@ -1063,13 +1059,13 @@ unname(taxa)
     ## [131,] NA                         
     ## [132,] NA                         
     ## [133,] NA                         
-    ## [134,] "Nicoletella"              
+    ## [134,] NA                         
     ## [135,] NA                         
     ## [136,] NA                         
     ## [137,] "Stappia"                  
     ## [138,] NA                         
     ## [139,] "Massilia"                 
-    ## [140,] NA                         
+    ## [140,] "Erysipelothrix"           
     ## [141,] "Mycobacterium"            
     ## [142,] "Microbacterium"           
     ## [143,] NA                         
@@ -1077,12 +1073,12 @@ unname(taxa)
     ## [145,] "Pseudoflavonifractor"     
     ## [146,] "Nocardioides"             
     ## [147,] NA                         
-    ## [148,] "Arachidicoccus"           
+    ## [148,] NA                         
     ## [149,] "Ruminococcus"             
     ## [150,] NA                         
     ## [151,] NA                         
     ## [152,] "Clostridium_sensu_stricto"
-    ## [153,] "Prevotella"               
+    ## [153,] NA                         
     ## [154,] NA                         
     ## [155,] NA                         
     ## [156,] NA                         
@@ -1203,7 +1199,7 @@ plot_richness(pruned_phyloseq,
 
 ``` r
 set.seed(15)
-#Pruning to subset the dataset 
+#Pruning to subset the dataset
 pruned_phyloseq <- subset_samples(phyloseq_obj, sex_s != "Not applicable")
 pruned_ord <- ordinate(pruned_phyloseq, "NMDS", "bray")
 ```
@@ -1275,7 +1271,7 @@ print(p1)
 
 ``` r
 #Create Plot Ordination showing the phylum present by sex
-pruned_phyloseq_ord <- ordinate(pruned_phyloseq,"NMDS", "bray")
+pruned_phyloseq_ord <- ordinate(pruned_phyloseq, "NMDS", "bray")
 ```
 
     ## Square root transformation
@@ -1332,8 +1328,8 @@ pruned_phyloseq_ord <- ordinate(pruned_phyloseq,"NMDS", "bray")
     ## half-change scaling: too few points below threshold
 
 ``` r
-p1 <- plot_ordination(pruned_phyloseq, pruned_phyloseq_ord, 
-                      type = "taxa", color = "Phylum", title = "taxa")
+p1 <- plot_ordination(pruned_phyloseq, pruned_phyloseq_ord,
+                      type = "Taxa", color = "Phylum", title = "taxa")
 print(p1)
 ```
 
@@ -1379,11 +1375,27 @@ plot_bar(pruned_phyloseq, x = "Class", fill = "sex_s")
 Discussion
 ==========
 
-Add around 2-3 pages interpreting your results and considering future directions one might take in analyzing these data.
+The majority of the results were formed through taking smaller sets of the whole metadata and outputting it in the form of different plots. Based on the results the figures showed, female hands contained a higher microbial diversity than within the sebum on male hands. Using different types of plots helped to thoroughly test the different aspects that are involved in the biodiversity of the microorganisms. The first thing that I decided to investigate from the data was richness (Figure 1 and 2). Ecologically, richness shows the number of different species that are represented within the community. Plotting just the diversity in male and female sebum from the observed data (Figure 2), I was able to see that male sebum had a more concentrated and lower alpha diversity in presented across the samples than female sebum did. This was further supported when the samples were plotted using Shannon diversity. Shannon diversity looks at both abundance and evenness within the present species. These results show that across all the samples, the male sebum didn’t contain as many different microbial communities as the female sebum did. It also shows that within the microorganisms found on males, there was much less evenness which lead me to believe that there must be some microbial communities that are more highly represented than others. This discovery in my dataset pushed me to further investigate what are the types of microbial communities that dominate male and female sebum in the hopes of further understanding what makes the sebum types different. Making plot ordinations and a phylogeny tree gave me a preliminary view on the ordering of the taxa and phylum present within the samples and comparing them between men and women (Figure 3,4, and 5). I then decided to take a closer look at the abundance of taxa and phylum through the creation of bar plots (Figure 6 and 7). These plots gave me the most compelling data in my research. When looking at taxonomy, Proteobacteria, Cyanobacteria, and Actinobacteria were the three most highly present taxa found in both samples. When I compared males and females, males exhibited a higher abundance in Proteobacteria than females which further supports the findings in my earlier graphs that showed the proportion in evenness in male and female sebum. Looking at phylum, females exhibited more alphaproteobacteria and betaproteobacteria was more present in males. Based on these results, I could conclude that although females and males exhibit some similarities in taxonomy, physiological differences between the genders accounts for the variating presence and abundance of different types of microbial communities. Investigating these findings further is advised and doing more background checks on the participants is advised because pH, hygiene, and environment exposure are all compelling factors that shape the microbial communities on each individual’s hands.
 
 Sources Cited
 =============
 
 Callahan,B.J. *et al.* (2016) DADA2: High-resolution sample inference from illumina amplicon data. *Nature Methods*, **13**, 581–583.
 
+Fierer,N. *et al.* (2008) The influence of sex, handedness, and washing on the diversity of hand surface bacteria. *Proceedings of the National Academy of Sciences*, **105**, 17994–17999.
+
+Fierer,N. *et al.* (2010) Forensic identification using skin bacterial communities. *Proceedings of the National Academy of Sciences*, **107**, 6477–6481.
+
+Grice,E.A. and Segre,J.A. (2011) The skin microbiome. *Nature Reviews Microbiology*, **9**, 244–253.
+
+Grice,E.A. *et al.* (2008) A diversity profile of the human skin microbiota. *Genome research*, **18**, 1043–1050.
+
 McMurdie,P.J. and Holmes,S. (2013) Phyloseq: An r package for reproducible interactive analysis and graphics of microbiome census data. *PLoS ONE*, **8**, e61217.
+
+Olsen,G.J. *et al.* (1986) Microbial ecology and evolution: A ribosomal rna approach. *Annual reviews in microbiology*, **40**, 337–365.
+
+Pochi,P.E. and Strauss,J.S. (1974) Endocrinologic control to the development and activity of the human sebaceous gland. *Journal of Investigative Dermatology*, **62**, 191–201.
+
+Stackebrandt,E. and Goebel,B. (1994) Taxonomic note: A place for dna-dna reassociation and 16S rRNA sequence analysis in the present species definition in bacteriology. *International Journal of Systematic and Evolutionary Microbiology*, **44**, 846–849.
+
+Woese,C.R. (1987) Bacterial evolution. *Microbiological reviews*, **51**, 221.
