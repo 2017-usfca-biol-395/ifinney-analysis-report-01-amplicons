@@ -1,6 +1,6 @@
 ---
-title: "Analysis Report 1: Your Title Here"
-author: "Don Francisco"
+title: "Analysis Report 1: Comparison of Male and Female Microbial Communities"
+author: "Isabella Finney"
 date: "October 20, 2017"
 output: github_document
 bibliography: references.bib
@@ -9,21 +9,21 @@ csl: bioinformatics.csl
 
 # Introduction
 
-Add about 1.5-2 pages here. Must cite at least 5 peer reviewed articles.
+  The skin is the largest organ in the human body. It acts as an effective barrier against pathogen and foreign invasions into the body. Not only is it a defense barrier, but it is also populated by a diverse number of microorganisms that serve different purposes. The skin acts as an ecological system depending on the particular environment the skin is exposed to at different times [@grice2011skin]. The ecological environment that the skin encounters determine the colonization of these microorganisms. Other determining factors are based on things that involve the host, such as gender, age, and hygiene. 
+  The development and application of modern molecular methods has made it possible for scientists to more fully understand the diverse communities of bacteria found on all over the body. The use of high-throughput sequencing on 16S ribosomal RNA genes has helped accomplished this goal [@olsen1986microbial]. The significance in the 16s RNA gene is that it’s universally found in all bacteria. This allows scientists to compare the sequences at various levels of taxonomic resolution [@woese1987bacterial]. Through various studies, scientists were able to conclude that different portions of the body have more concentrated portions of certain bacterial microorganisms than other areas on the body. Bacterial community concentrations are often dependent on moist, dry and sebaceous microenvironments. One of the difficulties in determining microorganisms on the skin is due to biases and inefficiency in extraction and sequencing 16S RNA genes. Whole genome shotgun sequencing must also be used in order to determine the full diversity of microorganisms. 
+  The areas with the most diversity are drier areas. This portion includes the buttocks, forearm, and portions of the hand. The most common microbiota found in these places are from the phyla Proteobacteria, Actinobacteria, Firmicutes, and Bacteriodetes [@grice2008diversity]. In particular, hands are important to the transfer of microorganisms across surfaces. Through various research, scientists were able to determine that 17% of the phylotypes were the same among the hands of the same individual and 13% was present on hands of different individuals [@fierer2008influence]. The hands also have about less than 150 distinctive bacterial phylotypes present [@stackebrandt1994taxonomic]. Age, gender, exposure to materials, hygiene, and dominant handedness were all contributing factors to the variation of microbiota. When taking a closer look at some of the contributing factors, the differences between males and female hands presented an interesting case. Using the results collected from a study that looked at bacterial communities present on the surface of hands [@fierer2010forensic], I further investigated whether gender differences are a strong factor in the production of certain bacterial communities. Some facts to consider are that statistically, male hands had larger pore size, skin thickness, lower pH, and produced more sebum [@pochi1974endocrinologic]. Taking into account these differences, I hypothesized that females would have a higher presence of diverse microbial communities than men. Investigating different aspects of the dataset may help determine whether gender difference plays a large role in the diversity of bacterial communities. 
 
 # Methods
 
 ## Sample origin and sequencing
 
-Add about half a page here. In this section instead of first person (I/we), use Fierer et al., since you'll just be describing what they did, based on the methods in their paper.
+  A few different sample studies were preformed within the Fierer et al. paper, on different objects in order to test the accuracy of this hypothetical approach. The first study involved swabbing computer keyboards (25–30 keys per keyboard) as well as swabbing the and the skin on the ventral surface of the distal joint of each fingertip of the owner of the keyboard. Swabbing has been shown to be a sufficient method of collecting data. Swabbing this specific area of the body was chosen because the biomass levels on the skin are high enough to get a sufficient and equal amount of swabs collected per subject. Another study was designed to test the survival and matching accuracy of the bacterial communities after an extended period of time. This study essentially split the swab samples and froze half of them, while leaving other half to sit in normal, indoor environmental conditions for up to 14 days. The last study swabbed both the palms of the hands of different subjects as well as their computer mouse. Their mice had been last touched 12 hours before collection. To sequence this data, scientists used DNA extraction and pyrosequencing via 454 sequencer. This process involves purifying DNA into fragments, placing them into beads, and copying it multiple times via PCR. After PCR, the beads are placed into wells on a sequencing plate where nucleotide bases are added to each well. From there, light is given out to the wells and depending on the light intensity that the camera records, the wells will display the number of nucleotides of the same type.
 
 ## Computational
 
-These are the methods you used. Should probably be at least a half of a page. At a very minimum should include citations for DADA2 [@callahan2016] and phyloseq [@mcmurdie2013]. Note that these don't count towards the five references you need to cite in the introduction.
+  The process to computationally parse and analyze the data gathered was accomplished using a systematic workflow. The first step was to install all the necessary packages needed to get the dataset in the best suited format possible. In particular, the two most important packages that were installed were DADA2 and phyloseq. DADA2 is a type of open-software package that’s designed to model and correct Illumina-sequenced amplicon errors. It is able to directly extrapolate sequences and accurately resolve any error in as little as 1 nucleotide base [@callahan2016]. The phyloseq pack is also an open-software. This software project was made to preform analysis of microbiome census data present in R. It imports data and allows a user to preform various types of analysis like subsetting, multi-table comparisons, and diversity analysis [@mcmurdie2013]. This package essentially allowed me to make the different figures comparing the data between men and women. The metadata set was first downloaded from the NCBI database. Then through the creation of a fastq processing script, the metadata was thoroughly trimmed based on a set of parameters determined from the 454 sequencer. From here, DADA2 does its job to check for errors in each of the samples. After doing quality checks on the trimmed and denoised sequences, chimeras were removed from the sequences in order to obtain a clean read. Chimeras are formed from two miscloned and joined DNA sequences. The cleaned sequences variants were assigned taxonomy based on known sequences and then a phylogeny was created from a fasta file format of the data. A phyloseq object was constructed from the DADA2 output. 
 
 # Results
-
-In addition to a minimum of 3-4 figures/tables (and associated captions), you should include sufficient text in this section to describe what your findings were. Remember that in the results section you just describe what you found, but you don't interpret it - that happens in the discussion.
 
 ```{r load-libraries, message = FALSE}
 # Be sure to install these packages before running this script
@@ -35,6 +35,9 @@ library("dplyr")
 library("tidyr")
 library("knitr")
 library("ggplot2")
+
+#load RColorBrewer package
+library("RColorBrewer")
 
 # this package allows for the easy inclusion of literature citations in our Rmd
 # more info here: https://github.com/crsh/citr
@@ -162,7 +165,7 @@ The output table has `r nrow(sequence_table)` rows (samples) and `r ncol(sequenc
 ```{r histogram-of-sequence-lengths}
 # Quick check to look at distribution of trimmed and denoised sequences
 hist(nchar(getSequences(sequence_table)),
-     main = "Histogram of fingal sequence variant lengths",
+     main = "Histogram of fungal sequence variant lengths",
      xlab = "Sequence length in bp")
 ```
 
@@ -265,13 +268,16 @@ phyloseq_obj <- phyloseq(otu_table(sequence_table_nochim,
                          sample_data(metadata_in), # metadata for each sample
                          tax_table(taxa), # taxonomy for each sequence variant
                          phy_tree(tree_in)) # phylogeny from sequence variants
+
+melted_obj <- psmelt(phyloseq_obj)
 ```
+
 
 ```{r example-phyloseq-plot-1}
 # alpha diversity metrics
 plot_richness(phyloseq_obj,
               x = "env_material_s",
-              measures = c("Shannon", "Simpson"),
+              measures = c("Shannon"),
               color = "sex_s") +
   xlab("Sample origin") +
   geom_jitter(width = 0.2) +
@@ -280,19 +286,71 @@ plot_richness(phyloseq_obj,
 
 **Figure 1**: Alpha diversity measures of the two sample types, colored by gender.
 
+```{r plot-richness-for-male-and-female}
+pruned_phyloseq <- subset_samples(phyloseq_obj, sex_s != "Not applicable")
+plot_richness(pruned_phyloseq,
+              measures = "Observed",
+              color = "sex_s")
+```
+
+**Figure 2**: Alpha richness of the observed samples colored by gender.
+
+```{r plot-ordination-of-taxa-by-sex}
+set.seed(15)
+#Pruning to subset the dataset
+pruned_phyloseq <- subset_samples(phyloseq_obj, sex_s != "Not applicable")
+pruned_ord <- ordinate(pruned_phyloseq, "NMDS", "bray")
+
+p1 <- plot_ordination(pruned_phyloseq, pruned_ord,
+                     type = "samples",
+                     color = "sex_s",
+                     title = "Ordination of Male versus Female Sequences")
+print(p1)
+```
+
+**Figure 3**: Plot ordination of the taxa present by gender. 
+
+```{r plot-ordination-of-phylum-by-sex}
+#Create Plot Ordination showing the phylum present by sex
+pruned_phyloseq_ord <- ordinate(pruned_phyloseq, "NMDS", "bray")
+p1 <- plot_ordination(pruned_phyloseq, pruned_phyloseq_ord,
+                      type = "Taxa", color = "Phylum", title = "taxa")
+print(p1)
+```
+
+**Figure 4**: Plot Ordination of the phylum present by gender.
+
 ```{r example-phyloseq-plot-2}
 # phylogeny, yay!
+phyloseq_obj <- subset_samples(phyloseq_obj, sex_s != "Not applicable")
 plot_tree(phyloseq_obj,
           color = "sex_s",
           ladderize = TRUE) # this arranges the tree branches from short to long
 ```
 
-**Figure 2**: Inferred phylogeny of sequences, with points on tips representing samples within which each particular taxa occurred. Tree represents maximum likelihood phylogeny inferred using RAxML.
+**Figure 5**: Inferred phylogeny of sequences, with points on tips representing samples within which each particular taxa occurred. Tree represents maximum likelihood phylogeny inferred using RAxML.
 
+install.packages("RColorBrewer")
+
+```{r bar-plot-of-phlyum-presence-by-sex}
+plot_bar(pruned_phyloseq, x = "sex_s", y = "Abundance", fill = "Phylum",
+ title = NULL, facet_grid = NULL) +
+  scale_fill_brewer(palette = "Paired")
+```
+
+**Figure 6**: Bar plot of the phylum present by gender.
+
+```{r bar-plot-of-class-presence-by-sex}
+pruned_phyloseq <- subset_samples(phyloseq_obj, sex_s != "Not applicable")
+plot_bar(pruned_phyloseq, x = "Class", fill = "sex_s")
+```
+
+**Figure 7**: Bar plot of class present colored by gender.
 
 # Discussion
 
-Add around 2-3 pages interpreting your results and considering future directions one might take in analyzing these data.
+  The majority of the results were formed through taking smaller sets of the whole metadata and outputting it in the form of different plots. Based on the results the figures showed, female hands contained a higher microbial diversity than within the sebum on male hands. Using different types of plots helped to thoroughly test the different aspects that are involved in the biodiversity of the microorganisms. The first thing that I decided to investigate from the data was richness (Figure 1 and 2). Ecologically, richness shows the number of different species that are represented within the community. Plotting just the diversity in male and female sebum from the observed data (Figure 2), I was able to see that male sebum had a more concentrated and lower alpha diversity in presented across the samples than female sebum did. This was further supported when the samples were plotted using Shannon diversity. Shannon diversity looks at both abundance and evenness within the present species. These results show that across all the samples, the male sebum didn’t contain as many different microbial communities as the female sebum did. It also shows that within the microorganisms found on males, there was much less evenness which lead me to believe that there must be some microbial communities that are more highly represented than others. 
+  This discovery in my dataset pushed me to further investigate what are the types of microbial communities that dominate male and female sebum in the hopes of further understanding what makes the sebum types different. Making plot ordinations and a phylogeny tree gave me a preliminary view on the ordering of the taxa and phylum present within the samples and comparing them between men and women (Figure 3,4, and 5). I then decided to take a closer look at the abundance of taxa and phylum through the creation of bar plots (Figure 6 and 7). These plots gave me the most compelling data in my research. When looking at taxonomy, Proteobacteria, Cyanobacteria, and Actinobacteria were the three most highly present taxa found in both samples. When I compared males and females, males exhibited a higher abundance in Proteobacteria than females which further supports the findings in my earlier graphs that showed the proportion in evenness in male and female sebum. Looking at phylum, females exhibited more alphaproteobacteria and betaproteobacteria was more present in males. Based on these results, I could conclude that although females and males exhibit some similarities in taxonomy, physiological differences between the genders accounts for the variating presence and abundance of different types of microbial communities. Investigating these findings further is advised and doing more background checks on the participants is advised because pH, hygiene, and environment exposure are all compelling factors that shape the microbial communities on each individual’s hands.
 
 # Sources Cited
 
